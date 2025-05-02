@@ -1,0 +1,9 @@
+Upload
+
+curl -X POST "http://localhost:9090/upload?user_id=user1&session_id=sess1"   --data-binary @Downloads/sample_audio.mp3
+
+curl -X GET "http://localhost:9090/chunks/14df6751-9bec-41ad-a4d2-70ceb8bef736
+
+curl -X GET "http://localhost:9090/sessions/user1"
+
+curl -X GET "http://localhost:9090/ws"

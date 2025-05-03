@@ -19,7 +19,6 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-// --- Models ---
 type AudioChunk struct {
 	ChunkID   string    `json:"chunk_id"`
 	UserID    string    `json:"user_id"`
@@ -38,7 +37,6 @@ type Metadata struct {
 	Transcript string    `json:"transcript"`
 }
 
-// --- In-Memory Store ---
 type MemoryStore struct {
 	mu       sync.RWMutex
 	metadata map[string]Metadata
@@ -73,7 +71,6 @@ func (s *MemoryStore) ListByUser(userID string) []Metadata {
 	return result
 }
 
-// --- Pipeline Stages ---
 type Job struct {
 	Chunk  AudioChunk
 	Result chan Metadata
@@ -100,7 +97,6 @@ func TransformStage(ctx context.Context, in <-chan Job) {
 	}
 }
 
-// --- Handlers ---
 var upgrader = websocket.Upgrader{}
 
 func handleUpload(store *MemoryStore, jobs chan Job) http.HandlerFunc {
